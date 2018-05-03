@@ -20,17 +20,10 @@
 
 
         <TextView
-            android:id="@+id/contact_name"
+            android:id="@+id/calls_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/app_nombre"
-            android:textSize="20sp" />
-
-        <TextView
-            android:id="@+id/calls_number"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/app_numero"
             android:textSize="20sp" />
 
         <TextView
@@ -39,6 +32,15 @@
             android:layout_height="wrap_content"
             android:text="@string/app_duracion"
             android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/calls_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/app_fecha"
+            android:textSize="20sp" />
+
+
 
     </LinearLayout>
 
