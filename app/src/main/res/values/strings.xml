@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Parcial1</string>
+
+    <string name="app_nombre">Nombre</string>
+    <string name="app_numero">Numero</string>
+    <string name="calls_nombre">Nombre</string>
+    <string name="calls_numero">Nombre</string>
+    <string name="app_duracion">Duracion</string>
+</resources>
