@@ -1,6 +1,9 @@
 package com.vega.parcial1;
 
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -15,14 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    private int[] ICONS;
-
-    {
-        ICONS[0] = (R.drawable.llamada);
-        ICONS[1] = (R.drawable.contacto);
-        ICONS[2] = (R.drawable.nofav);
-
-    }
+    private final int[] ICONS = {(R.drawable.llamada), (R.drawable.contacto), (R.drawable.nofav)};
 
 
     @Override
@@ -50,4 +46,14 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+    public void setPermissions(){
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG)
+                != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 1);
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALL_LOG}, 1);
+        }
+
+    }
+
 }

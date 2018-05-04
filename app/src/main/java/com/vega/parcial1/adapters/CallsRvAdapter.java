@@ -9,14 +9,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.vega.parcial1.R;
+import com.vega.parcial1.models.ModelCalls;
+
+import java.util.List;
 
 public class CallsRvAdapter extends RecyclerView.Adapter<CallsRvAdapter.ViewHolder> {
 
     private LayoutInflater layoutInflater;
     private Context mcontext;
 
-    public CallsRvAdapter(Context context){
+    private List<ModelCalls> mListCalls;
+
+    public CallsRvAdapter(Context context, List<ModelCalls> listCalls){
         mcontext = context;
+        mListCalls = listCalls;
 
     }
 
@@ -41,11 +47,15 @@ public class CallsRvAdapter extends RecyclerView.Adapter<CallsRvAdapter.ViewHold
         duration = holder.duration;
         date = holder.date;
 
+        name.setText(mListCalls.get(position).getName());
+        duration.setText(mListCalls.get(position).getDuration());
+        date.setText(mListCalls.get(position).getDate());
+
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mListCalls.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
