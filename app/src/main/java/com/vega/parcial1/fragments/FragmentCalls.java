@@ -34,6 +34,7 @@ public class FragmentCalls extends Fragment {
 
     private RecyclerView recyclerView;
     private View v;
+    private int request = 14;
 
     public FragmentCalls(){
 
@@ -106,7 +107,6 @@ public class FragmentCalls extends Fragment {
 
             list.add(new ModelCalls(cursor.getString(number), CalcularTiempo(cursor.getString(duration_idx)), longDF.format(date) + " " + shortDfH.format(date)));
 
-            Log.d("MiC::", cursor.getString(number));
         }
 
         cursor.close();
@@ -142,11 +142,26 @@ public class FragmentCalls extends Fragment {
         } else{ txtS = Integer.toString(segundo); }
 
 
-        duracion = txtH + ": " + txtM + ": " + txtS;
+        duracion = txtH + ":" + txtM + ":" + txtS;
         return duracion;
     }
 
     public void requestPermission(){
-        ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_CALL_LOG}, 1);
+        requestPermissions(new String[]{Manifest.permission.READ_CALL_LOG},request);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        if (requestCode == request
+                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            CallsRvAdapter adapter = new CallsRvAdapter(getContext(), getCallLogs());
+
+            recyclerView.setAdapter(adapter);
+        }
+        else{
+            requestPermission();
+        }
+
     }
 }

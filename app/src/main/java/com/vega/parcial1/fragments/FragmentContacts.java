@@ -26,6 +26,7 @@ public class FragmentContacts extends Fragment {
 
     private View v;
     private RecyclerView recyclerView;
+    private int request = 14;
 
     public FragmentContacts(){
 
@@ -53,8 +54,10 @@ public class FragmentContacts extends Fragment {
         List<ModelContacts> list = new ArrayList<>();
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.READ_CONTACTS}, 1);
+            requestPermission();
         }
+
+        else {
 
             Cursor cursor = getContext().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, ContactsContract.Contacts.DISPLAY_NAME + " ASC");
             cursor.moveToFirst();
@@ -66,8 +69,25 @@ public class FragmentContacts extends Fragment {
             }
 
             cursor.close();
-
+        }
 
         return list;
+    }
+
+    public void requestPermission(){
+        requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, request);
+    }
+
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        if (requestCode == request && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            ContactsRvAdapter adapter = new ContactsRvAdapter(getContext(), getContacts());
+            recyclerView.setAdapter(adapter);
+        } else {
+            requestPermission();
+        }
+
     }
 }
