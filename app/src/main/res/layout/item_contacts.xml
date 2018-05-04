@@ -40,6 +40,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/llamar"
         android:layout_weight="1"
         android:layout_marginRight="3dp"
         android:layout_gravity="center"

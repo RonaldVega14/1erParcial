@@ -7,6 +7,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 
 import com.vega.parcial1.adapters.ViewPagerAdapter;
 import com.vega.parcial1.fragments.FragmentCalls;
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
         tabLayout = findViewById(R.id.tablayout);
         viewPager = findViewById(R.id.viewpager);
 
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         adapter.addFragment(new FragmentCalls(), getString(R.string.tab_lamada));
@@ -39,7 +42,9 @@ public class MainActivity extends AppCompatActivity {
 
         tabLayout.setupWithViewPager(viewPager);
 
-        for (int i=0; i<tabLayout.getTabCount(); i++){
+
+
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
             TabLayout.Tab tab = tabLayout.getTabAt(i);
             tab.setIcon(ICONS[i]);
         }
@@ -47,9 +52,9 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    public void setPermissions(){
+    public void setPermissions() {
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.READ_CALL_LOG)
-                != PackageManager.PERMISSION_GRANTED){
+                != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CONTACTS}, 1);
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_CALL_LOG}, 1);
         }
@@ -57,3 +62,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
+
+
+

@@ -14,6 +14,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.vega.parcial1.R;
 import com.vega.parcial1.adapters.ContactsRvAdapter;
@@ -21,6 +22,8 @@ import com.vega.parcial1.models.ModelContacts;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.support.v4.content.PermissionChecker.checkSelfPermission;
 
 public class FragmentContacts extends Fragment {
 
@@ -44,6 +47,7 @@ public class FragmentContacts extends Fragment {
         ContactsRvAdapter adapter = new ContactsRvAdapter(getContext(), getContacts());
         recyclerView.setAdapter(adapter);
 
+
         return v;
 
 
@@ -55,9 +59,7 @@ public class FragmentContacts extends Fragment {
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
             requestPermission();
-        }
-
-        else {
+        } else {
 
             Cursor cursor = getContext().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, ContactsContract.Contacts.DISPLAY_NAME + " ASC");
             cursor.moveToFirst();
@@ -90,4 +92,6 @@ public class FragmentContacts extends Fragment {
         }
 
     }
+
+
 }

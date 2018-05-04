@@ -157,6 +157,7 @@ public class FragmentCalls extends Fragment {
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             CallsRvAdapter adapter = new CallsRvAdapter(getContext(), getCallLogs());
 
+
             recyclerView.setAdapter(adapter);
         }
         else{
