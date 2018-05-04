@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private TabLayout tabLayout;
     private ViewPager viewPager;
 
-    private final int[] ICONS = {(R.drawable.llamada), (R.drawable.contacto), (R.drawable.nofav)};
+    private final int[] ICONS = {(R.drawable.llamada), (R.drawable.contacto), (R.drawable.star)};
 
 
     @Override

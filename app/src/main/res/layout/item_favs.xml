@@ -4,14 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
+    android:weightSum="10"
     android:orientation="horizontal">
 
     <Button
-        android:layout_margin="5dp"
+        android:layout_weight="1"
+        android:layout_marginLeft="8dp"
         android:layout_gravity="center"
         android:background="@drawable/contacto"
-        android:layout_width="42dp"
-        android:layout_height="42dp" />
+        android:layout_width="0dp"
+        android:layout_height="32dp" />
 
     <LinearLayout
         android:padding="10dp"
@@ -26,22 +28,23 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/app_nombre"
-            android:textSize="20dp"/>
+            android:textSize="18dp"/>
 
         <TextView
             android:id="@+id/contact_number"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/app_numero"
-            android:textSize="20dp"/>
+            android:textSize="18dp"/>
 
     </LinearLayout>
 
     <Button
-        android:layout_width="42dp"
-        android:layout_height="42dp"
+        android:layout_weight="1"
+        android:layout_marginRight="8dp"
         android:layout_gravity="center"
-        android:layout_margin="5dp"
+        android:layout_width="0dp"
+        android:layout_height="32dp"
         android:background="@drawable/llamada" />
 
 </LinearLayout>
