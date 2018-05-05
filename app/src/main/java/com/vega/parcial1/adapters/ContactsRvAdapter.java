@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.vega.parcial1.MainActivity;
 import com.vega.parcial1.R;
+import com.vega.parcial1.fragments.FragmentFavs;
 import com.vega.parcial1.models.ModelContacts;
 
 import java.util.List;
@@ -33,6 +34,7 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
     private Context mcontext;
     private List<ModelContacts> mListContacts;
     boolean favo;
+    private FragmentFavs ff;
 
     public ContactsRvAdapter(Context context, List<ModelContacts> listContacts) {
         mcontext = context;
@@ -62,37 +64,39 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
 
         contact_name.setText(mListContacts.get(position).getName());
         contact_number.setText(mListContacts.get(position).getNumber());
-        boton.setImageResource(mListContacts.get(position).isFav()?R.drawable.full_star:R.drawable.star);
-
-        boton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mListContacts.get(position).setFav(true);
-                if (!favo) {
-                    if (!holder.fav) {
-                        mListContacts.get(position).setFav(true);
-                        holder.boton.setImageResource(R.drawable.full_star);
-                        holder.fav=true;
-                    } else {
-                        mListContacts.get(position).setFav(false);
-                        holder.boton.setImageResource(R.drawable.star);
-                        holder.fav=false;
-                    }
-
-                } else {
-                    if (!holder.fav) {
-                        mListContacts.get(position).setFav(true);
-                        holder.boton.setImageResource(R.drawable.full_star);
-                        holder.fav = true;
-                    } else {
-                        mListContacts.get(position).setFav(false);
-                        holder.boton.setImageResource(R.drawable.star);
-                        holder.fav = false;
-                    }
-                }
-
-            }
-        });
+//        boton.setImageResource(mListContacts.get(position).isFav()?R.drawable.full_star:R.drawable.star);
+//
+//        boton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mListContacts.get(position).setFav(true);
+//                if (!favo) {
+//                    if (!holder.fav) {
+//                        mListContacts.get(position).setFav(true);
+//                        holder.boton.setImageResource(R.drawable.full_star);
+//                        holder.fav=true;
+//
+//                    } else {
+//                        mListContacts.get(position).setFav(false);
+//                        holder.boton.setImageResource(R.drawable.star);
+//                        holder.fav=false;
+//                    }
+//
+//                } else {
+//                    if (!holder.fav) {
+//                        mListContacts.get(position).setFav(true);
+//                        holder.boton.setImageResource(R.drawable.full_star);
+//                        holder.fav = true;
+//
+//                    } else {
+//                        mListContacts.get(position).setFav(false);
+//                        holder.boton.setImageResource(R.drawable.star);
+//                        holder.fav = false;
+//                    }
+//                }
+//
+//            }
+//        });
 
     }
 
@@ -112,7 +116,7 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
 
             contact_name = itemView.findViewById(R.id.contact_name);
             contact_number = itemView.findViewById(R.id.contact_number);
-            boton = itemView.findViewById(R.id.favorito);
+//            boton = itemView.findViewById(R.id.favorito);
             fav = favo;
 
         }

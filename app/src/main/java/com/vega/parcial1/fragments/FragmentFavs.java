@@ -11,6 +11,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,14 +57,29 @@ public class FragmentFavs extends Fragment {
     }
 
     private List<ModelContacts> getFavs(){
-        list = fc.getContacts();
         for (int i = 0; i<list.size();i++){
             if (list.get(i).isFav() == true){
-                favs.add( new ModelContacts(list.get(i).getName(), list.get(i).getNumber(), list.get(i).isFav()));
+                prepareFavContacts(list);
             }
         }
 
         return favs;
+    }
+
+    public List<ModelContacts> prepareFavContacts(List<ModelContacts> contacto){
+        for (int i = 0; i<contacto.size();i++){
+            if(contacto.get(i).isFav()) {
+                favs.add(new ModelContacts(contacto.get(i).getName(), contacto.get(i).getNumber(), contacto.get(i).isFav()));
+            }
+        }
+        return favs;
+    }
+
+    public void update(List<ModelContacts> Contactoos) {
+        Log.d("LifeCycle", "On Update");
+        favs=prepareFavContacts(Contactoos);
+        FavsRvAdapter adapter = new FavsRvAdapter(getContext(), getFavs(), true);
+        recyclerView.setAdapter(adapter);
     }
 
 }

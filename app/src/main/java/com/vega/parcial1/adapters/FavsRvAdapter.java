@@ -37,7 +37,7 @@ public class FavsRvAdapter extends RecyclerView.Adapter<FavsRvAdapter.ViewHolder
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         inflater = LayoutInflater.from(mcontext);
-        View view = inflater.inflate(R.layout.item_favs, parent, false);
+        View view = inflater.inflate(R.layout.item_contacts, parent, false);
         ViewHolder viewHolder = new ViewHolder(view, this.fav);
 
         return viewHolder;
@@ -62,7 +62,7 @@ public class FavsRvAdapter extends RecyclerView.Adapter<FavsRvAdapter.ViewHolder
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        Button butt;
+
         TextView contact_name, contact_number;
 
         public ViewHolder(View itemView, boolean favs){
