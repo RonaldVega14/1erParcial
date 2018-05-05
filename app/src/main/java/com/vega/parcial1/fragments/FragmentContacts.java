@@ -15,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.vega.parcial1.R;
 import com.vega.parcial1.adapters.ContactsRvAdapter;
@@ -30,6 +31,7 @@ public class FragmentContacts extends Fragment {
     private View v;
     private RecyclerView recyclerView;
     private int request = 14;
+    //private Button boton ;
 
     public FragmentContacts(){
 
@@ -46,6 +48,10 @@ public class FragmentContacts extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         ContactsRvAdapter adapter = new ContactsRvAdapter(getContext(), getContacts());
         recyclerView.setAdapter(adapter);
+       // boton= recyclerView.findViewById(R.id.llamar);
+
+
+
 
 
         return v;
@@ -58,7 +64,7 @@ public class FragmentContacts extends Fragment {
         List<ModelContacts> list = new ArrayList<>();
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
-            requestPermission();
+            //requestPermission();
         } else {
 
             Cursor cursor = getContext().getContentResolver().query(ContactsContract.CommonDataKinds.Phone.CONTENT_URI, null, null, null, ContactsContract.Contacts.DISPLAY_NAME + " ASC");
@@ -69,28 +75,19 @@ public class FragmentContacts extends Fragment {
                         cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))));
 
             }
+//            boton.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    Toast.makeText( getContext(), "Realizando llamada...", Toast.LENGTH_LONG).show();
+//
+//
+//                }
+//            });
 
             cursor.close();
         }
 
         return list;
-    }
-
-    public void requestPermission(){
-        requestPermissions(new String[]{Manifest.permission.READ_CONTACTS}, request);
-    }
-
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-
-        if (requestCode == request && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            ContactsRvAdapter adapter = new ContactsRvAdapter(getContext(), getContacts());
-            recyclerView.setAdapter(adapter);
-        } else {
-            requestPermission();
-        }
-
     }
 
 

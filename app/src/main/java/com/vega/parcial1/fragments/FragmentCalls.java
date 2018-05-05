@@ -65,7 +65,7 @@ public class FragmentCalls extends Fragment {
         List<ModelCalls> list = new ArrayList<>();
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
-            requestPermission();
+           // requestPermission();
             }
 
 
@@ -146,23 +146,5 @@ public class FragmentCalls extends Fragment {
         return duracion;
     }
 
-    public void requestPermission(){
-        requestPermissions(new String[]{Manifest.permission.READ_CALL_LOG},request);
-    }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
-
-        if (requestCode == request
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            CallsRvAdapter adapter = new CallsRvAdapter(getContext(), getCallLogs());
-
-
-            recyclerView.setAdapter(adapter);
-        }
-        else{
-            requestPermission();
-        }
-
-    }
 }
