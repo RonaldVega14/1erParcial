@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -31,6 +32,7 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
     private LayoutInflater inflater;
     private Context mcontext;
     private List<ModelContacts> mListContacts;
+    boolean favo;
 
     public ContactsRvAdapter(Context context, List<ModelContacts> listContacts) {
         mcontext = context;
@@ -42,33 +44,55 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         inflater = LayoutInflater.from(mcontext);
         View view = inflater.inflate(R.layout.item_contacts, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view);
+        ViewHolder viewHolder = new ViewHolder(view, this.favo);
 
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
         TextView contact_name, contact_number;
-        //Button boton;
+        ImageView boton;
 
         contact_name = holder.contact_name;
         contact_number = holder.contact_number;
-       // boton = holder.boton;
+        boton = holder.boton;
 
 
         contact_name.setText(mListContacts.get(position).getName());
         contact_number.setText(mListContacts.get(position).getNumber());
-        /*boton.setOnClickListener(new View.OnClickListener() {
+        boton.setImageResource(mListContacts.get(position).isFav()?R.drawable.full_star:R.drawable.star);
+
+        boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(mcontext, "Realizando llamada...", Toast.LENGTH_LONG).show();
+                mListContacts.get(position).setFav(true);
+                if (!favo) {
+                    if (!holder.fav) {
+                        mListContacts.get(position).setFav(true);
+                        holder.boton.setImageResource(R.drawable.full_star);
+                        holder.fav=true;
+                    } else {
+                        mListContacts.get(position).setFav(false);
+                        holder.boton.setImageResource(R.drawable.star);
+                        holder.fav=false;
+                    }
 
+                } else {
+                    if (!holder.fav) {
+                        mListContacts.get(position).setFav(true);
+                        holder.boton.setImageResource(R.drawable.full_star);
+                        holder.fav = true;
+                    } else {
+                        mListContacts.get(position).setFav(false);
+                        holder.boton.setImageResource(R.drawable.star);
+                        holder.fav = false;
+                    }
+                }
 
             }
-        });*/
-
+        });
 
     }
 
@@ -80,14 +104,16 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView contact_name, contact_number;
-        Button boton;
+        ImageView boton;
+        boolean fav;
 
-        public ViewHolder(View itemView){
+        public ViewHolder(View itemView, boolean favo){
             super(itemView);
 
             contact_name = itemView.findViewById(R.id.contact_name);
             contact_number = itemView.findViewById(R.id.contact_number);
-            boton = itemView.findViewById(R.id.llamar);
+            boton = itemView.findViewById(R.id.favorito);
+            fav = favo;
 
         }
     }

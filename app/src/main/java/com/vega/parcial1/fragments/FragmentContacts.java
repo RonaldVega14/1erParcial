@@ -30,12 +30,15 @@ public class FragmentContacts extends Fragment {
 
     private View v;
     private RecyclerView recyclerView;
-    private int request = 14;
-    //private Button boton ;
+    private static  FragmentContacts fc;
+    List<ModelContacts> list = new ArrayList<>();
+
+    ModelContacts modelo;
 
     public FragmentContacts(){
 
     }
+
 
     @Nullable
     @Override
@@ -48,20 +51,15 @@ public class FragmentContacts extends Fragment {
         recyclerView.setLayoutManager(layoutManager);
         ContactsRvAdapter adapter = new ContactsRvAdapter(getContext(), getContacts());
         recyclerView.setAdapter(adapter);
-       // boton= recyclerView.findViewById(R.id.llamar);
-
-
-
-
 
         return v;
 
 
     }
 
-    private List<ModelContacts> getContacts(){
+    public List<ModelContacts> getContacts(){
 
-        List<ModelContacts> list = new ArrayList<>();
+
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED){
             //requestPermission();
@@ -71,23 +69,26 @@ public class FragmentContacts extends Fragment {
             cursor.moveToFirst();
             while (cursor.moveToNext()) {
 
+                modelo = new ModelContacts(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)),
+                        cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)), false);
+
+
                 list.add(new ModelContacts(cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)),
-                        cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))));
+                        cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)), modelo.isFav()));
 
             }
-//            boton.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Toast.makeText( getContext(), "Realizando llamada...", Toast.LENGTH_LONG).show();
-//
-//
-//                }
-//            });
+
+
+
 
             cursor.close();
         }
 
         return list;
+    }
+
+    public FragmentContacts getInstance(){
+        return fc;
     }
 
 

@@ -3,10 +3,12 @@ package com.vega.parcial1.models;
 public class ModelContacts {
 
     private String name, number;
+    private boolean fav;
 
-    public ModelContacts(String name, String number) {
+    public ModelContacts(String name, String number, boolean fav) {
         this.name = name;
         this.number = number;
+        this.fav = fav;
     }
 
     public String getName() {
@@ -23,5 +25,13 @@ public class ModelContacts {
 
     public void setNumber(String number) {
         this.number = number;
+    }
+
+    public boolean isFav() {
+        return fav;
+    }
+
+    public void setFav(boolean fav) {
+        this.fav = fav;
     }
 }
