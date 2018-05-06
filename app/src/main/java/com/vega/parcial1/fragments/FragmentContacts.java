@@ -31,7 +31,7 @@ public class FragmentContacts extends Fragment {
     private View v;
     private RecyclerView recyclerView;
     private static  FragmentContacts fc;
-    List<ModelContacts> list = new ArrayList<>();
+    static List<ModelContacts> list = new ArrayList<>();
 
     ModelContacts modelo;
 

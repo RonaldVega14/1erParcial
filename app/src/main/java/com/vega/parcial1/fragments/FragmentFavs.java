@@ -26,13 +26,14 @@ import com.vega.parcial1.models.ModelContacts;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.vega.parcial1.fragments.FragmentContacts.list;
+
 public class FragmentFavs extends Fragment {
     boolean fav;
     private View v;
     private RecyclerView recyclerView;
-    private static  FragmentContacts fc;
-    List<ModelContacts> list = new ArrayList<>();
-    List<ModelContacts> favs = new ArrayList<>();
+    private static  FragmentFavs ff;
+    List<ModelContacts> favs;
 
 
     public FragmentFavs(){
@@ -57,27 +58,40 @@ public class FragmentFavs extends Fragment {
     }
 
     private List<ModelContacts> getFavs(){
+
+        List<ModelContacts> favs = new ArrayList<>();
         for (int i = 0; i<list.size();i++){
             if (list.get(i).isFav() == true){
-                prepareFavContacts(list);
+                favs.add(new ModelContacts(list.get(i).getName(), list.get(i).getNumber(), list.get(i).isFav()));
             }
         }
 
         return favs;
     }
 
-    public List<ModelContacts> prepareFavContacts(List<ModelContacts> contacto){
-        for (int i = 0; i<contacto.size();i++){
-            if(contacto.get(i).isFav()) {
-                favs.add(new ModelContacts(contacto.get(i).getName(), contacto.get(i).getNumber(), contacto.get(i).isFav()));
-            }
-        }
-        return favs;
+//    public List<ModelContacts> prepareFavContacts(List<ModelContacts> contacto){
+//        for (int i = 0; i<contacto.size();i++){
+//            if(contacto.get(i).isFav()) {
+//                favs.add(new ModelContacts(contacto.get(i).getName(), contacto.get(i).getNumber(), contacto.get(i).isFav()));
+//            }
+//        }
+//
+//        return favs;
+//    }
+//
+
+    public static FragmentFavs getInstance(){
+        return ff;
     }
 
     public void update(List<ModelContacts> Contactoos) {
         Log.d("LifeCycle", "On Update");
-        favs=prepareFavContacts(Contactoos);
+        List<ModelContacts> favs = new ArrayList<>();
+        for (int i = 0; i<Contactoos.size();i++){
+            if (list.get(i).isFav() == true){
+                favs.add(new ModelContacts(list.get(i).getName(), list.get(i).getNumber(), list.get(i).isFav()));
+            }
+        }
         FavsRvAdapter adapter = new FavsRvAdapter(getContext(), getFavs(), true);
         recyclerView.setAdapter(adapter);
     }
