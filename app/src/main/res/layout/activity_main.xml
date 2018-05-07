@@ -7,30 +7,26 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:id="@+id/appy">-->
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?android:attr/actionBarSize"-->
+            <!--android:background="@color/colorPrimary"-->
+            <!--app:titleTextColor="@color/white"-->
+            <!--app:title="@string/app_name">-->
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+            <!--<android.support.v7.widget.SearchView-->
+                <!--style="@style/SearchViewStyle"-->
+                <!--android:id="@+id/search"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--app:queryHint="..." />-->
+        <!--</android.support.v7.widget.Toolbar>-->
 
-        android:id="@+id/appy">
-    <android.support.v7.widget.Toolbar
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        android:background="@color/colorPrimaryDark"
-        app:titleTextColor="@color/cardview_light_background"
-        app:title="@string/app_name">
-
-        <android.support.v7.widget.SearchView
-            style="@style/SearchViewStyle"
-            android:id="@+id/searchy"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:queryHint="..." />
-    </android.support.v7.widget.Toolbar>
-
-    </android.support.design.widget.AppBarLayout>
-
-
+    <!--</android.support.design.widget.AppBarLayout>-->
     <android.support.design.widget.TabLayout
         android:id="@+id/tablayout"
         android:layout_width="match_parent"

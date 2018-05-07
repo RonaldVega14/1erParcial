@@ -11,11 +11,14 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.Toast;
+import android.widget.EditText;
 
 import com.vega.parcial1.R;
 import com.vega.parcial1.adapters.ContactsRvAdapter;
@@ -24,14 +27,14 @@ import com.vega.parcial1.models.ModelContacts;
 import java.util.ArrayList;
 import java.util.List;
 
-import static android.support.v4.content.PermissionChecker.checkSelfPermission;
-
 public class FragmentContacts extends Fragment {
 
     private View v;
     private RecyclerView recyclerView;
     private static  FragmentContacts fc;
-    static List<ModelContacts> list = new ArrayList<>();
+    public static List<ModelContacts> list = new ArrayList<>();
+    ContactsRvAdapter adapter;
+    SearchView searchView;
 
     ModelContacts modelo;
 
@@ -48,8 +51,7 @@ public class FragmentContacts extends Fragment {
         recyclerView = v.findViewById(R.id.rv_contacts);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         RecyclerView.LayoutManager layoutManager = linearLayoutManager;
-        recyclerView.setLayoutManager(layoutManager);
-        ContactsRvAdapter adapter = new ContactsRvAdapter(getContext(), getContacts());
+        recyclerView.setLayoutManager(layoutManager);adapter = new ContactsRvAdapter(getContext(), getContacts());
         recyclerView.setAdapter(adapter);
 
         return v;

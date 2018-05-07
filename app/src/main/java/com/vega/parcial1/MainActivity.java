@@ -11,8 +11,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,12 +29,22 @@ import com.vega.parcial1.adapters.ViewPagerAdapter;
 import com.vega.parcial1.fragments.FragmentCalls;
 import com.vega.parcial1.fragments.FragmentContacts;
 import com.vega.parcial1.fragments.FragmentFavs;
+import com.vega.parcial1.models.ModelContacts;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static com.vega.parcial1.fragments.FragmentContacts.list;
 
 public class MainActivity extends AppCompatActivity {
+
 
     private TabLayout tabLayout;
     private ViewPager viewPager;
     private int code = 14;
+//    MainActivityAdapter madapter;
+//    RecyclerView searchrv;
+//    SearchView searchView;
 
     private final int[] ICONS = {(R.drawable.llamada), (R.drawable.contacto), (R.drawable.star)};
 
@@ -58,9 +74,47 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
 
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        switch (item.getItemId()) {
+//            case R.id.action_search:
+//                Toast.makeText(this, "Hola, ready pa buscar", Toast.LENGTH_LONG);
+//
+//            default:
+//                // If we got here, the user's action was not recognized.
+//                // Invoke the superclass to handle it.
+//                return super.onOptionsItemSelected(item);
+//
+//        }
+//    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.search_bar, menu);
+        MenuItem item = menu.findItem(R.id.searchbar);
+        SearchView searchView = (SearchView) item.getActionView();
+
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                adapter.filter(newText);
+                Log.d("Main Activity:", "Entrando a buscar");
+                viewPager.setCurrentItem(1);
+
+                return false;
+            }
+        });
+
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override

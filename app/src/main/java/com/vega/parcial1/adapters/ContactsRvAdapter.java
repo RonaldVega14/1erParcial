@@ -23,6 +23,7 @@ import com.vega.parcial1.R;
 import com.vega.parcial1.fragments.FragmentFavs;
 import com.vega.parcial1.models.ModelContacts;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import static android.support.v4.app.ActivityCompat.requestPermissions;
@@ -57,15 +58,18 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
         ff = FragmentFavs.getInstance();
 
         TextView contact_name, contact_number;
-        ImageView boton;
+        ImageView boton, contact_icon;
 
         contact_name = holder.contact_name;
         contact_number = holder.contact_number;
         boton = holder.boton;
+        contact_icon = holder.contact_icon;
+
 
 
         contact_name.setText(mListContacts.get(position).getName());
         contact_number.setText(mListContacts.get(position).getNumber());
+        contact_icon.setImageResource(R.drawable.contacto);
         boton.setImageResource(mListContacts.get(position).isFav()?R.drawable.full_star:R.drawable.star);
 
         boton.setOnClickListener(new View.OnClickListener() {
@@ -97,13 +101,13 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
                     }
                 }
 
+//                ff.update(mListContacts);
+
 
             }
 
 
         });
-
-//        ff.update(mListContacts);
 
     }
 
@@ -112,18 +116,21 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
         return mListContacts.size();
     }
 
+
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         TextView contact_name, contact_number;
-        ImageView boton;
+        ImageView boton, contact_icon;
         boolean fav;
 
         public ViewHolder(View itemView, boolean favo){
             super(itemView);
 
+
             contact_name = itemView.findViewById(R.id.contact_name);
             contact_number = itemView.findViewById(R.id.contact_number);
             boton = itemView.findViewById(R.id.favorito);
+            contact_icon = itemView.findViewById(R.id.contact_icon);
             fav = favo;
 
         }
