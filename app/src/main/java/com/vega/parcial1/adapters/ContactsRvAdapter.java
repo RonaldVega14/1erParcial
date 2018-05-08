@@ -139,6 +139,7 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
                 tvnumber.setText(mListContacts.get(position).getNumber());
                 myDialog.show();
 
+                Button llamar2 = myDialog.findViewById(R.id.display_call);
                 Button share = myDialog.findViewById(R.id.display_share);
                 share.setOnClickListener(new View.OnClickListener() {
                     @Override
@@ -151,6 +152,13 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
                         shareIntent.putExtra(Intent.EXTRA_TEXT, mcontext.getString(R.string.app_nombre) + ": " + mListContacts.get(position).getName().toString() + "\n" + mcontext.getString(R.string.app_numero) + ": " + mListContacts.get(position).getNumber().toString());
                         mcontext.startActivity(shareIntent);
 
+                    }
+                });
+
+                llamar2.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        llamar(mListContacts.get(position).getNumber());
                     }
                 });
             }

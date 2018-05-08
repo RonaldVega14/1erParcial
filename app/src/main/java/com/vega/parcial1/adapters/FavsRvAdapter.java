@@ -56,16 +56,23 @@ public class FavsRvAdapter extends RecyclerView.Adapter<FavsRvAdapter.ViewHolder
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         TextView contact_name, contact_number;
         ImageView boton;
-        Button llamar;
+        Button llamando;
 
         contact_name = holder.contact_name;
         contact_number = holder.contact_number;
         boton = holder.boton;
-        llamar = holder.llamar;
+        llamando = holder.llamando;
 
         contact_name.setText(mListFavs.get(position).getName());
         contact_number.setText(mListFavs.get(position).getNumber());
         boton.setImageResource(mListFavs.get(position).isFav()?R.drawable.full_star:R.drawable.star);
+
+        llamando.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                llamar(mListFavs.get(position).getNumber());
+            }
+        });
 
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -127,15 +134,6 @@ public class FavsRvAdapter extends RecyclerView.Adapter<FavsRvAdapter.ViewHolder
             }
         });
 
-        llamar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                llamar(mListFavs.get(position).getNumber());
-            }
-        });
-
-
     }
 
     @Override
@@ -149,7 +147,7 @@ public class FavsRvAdapter extends RecyclerView.Adapter<FavsRvAdapter.ViewHolder
 
         TextView contact_name, contact_number;
         ImageView boton;
-        Button llamar;
+        Button llamando;
         boolean fav;
 
         public ViewHolder(View itemView){
@@ -158,7 +156,7 @@ public class FavsRvAdapter extends RecyclerView.Adapter<FavsRvAdapter.ViewHolder
             contact_name = itemView.findViewById(R.id.contact_name);
             contact_number = itemView.findViewById(R.id.contact_number);
             boton = itemView.findViewById(R.id.favorito);
-            llamar = itemView.findViewById(R.id.llamar);
+            llamando = itemView.findViewById(R.id.llamar);
         }
     }
 
