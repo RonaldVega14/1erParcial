@@ -12,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -28,12 +29,17 @@ import com.vega.parcial1.models.ModelContacts;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.vega.parcial1.MainActivity.c;
+
 public class FragmentContacts extends Fragment {
 
     private View v;
     private RecyclerView recyclerView;
     private static  FragmentContacts fc;
     public static List<ModelContacts> list = new ArrayList<>();
+
+    public static List<ModelContacts> filteredContactList = new ArrayList<>();
+    public static List<ModelContacts> aux = new ArrayList<>();
     ContactsRvAdapter adapter;
 
     ModelContacts modelo;
@@ -95,6 +101,34 @@ public class FragmentContacts extends Fragment {
 
     public static FragmentContacts getInstance(){
         return fc;
+    }
+
+    public List<ModelContacts> filter( String query){
+        query = query.toLowerCase();
+
+        if (c==1){
+            aux=list;
+        }
+        c=0;
+        filteredContactList= new ArrayList<>();
+        for ( ModelContacts model:aux){
+            final String text = model.getName().toLowerCase();
+            if (text.startsWith(query)){
+                filteredContactList.add(model);
+            }
+        }
+        return filteredContactList;
+    }
+
+    public static void updatefc(){
+
+        list = filteredContactList;
+
+    }
+
+    public static void auxlist(){
+        list=aux;
+        c=1;
     }
 
 

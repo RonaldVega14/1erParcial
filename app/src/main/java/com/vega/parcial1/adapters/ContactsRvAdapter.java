@@ -40,10 +40,8 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
 
     private LayoutInflater inflater;
     private Context mcontext;
-    private static List<ModelContacts> mListContacts;
+    public List<ModelContacts> mListContacts;
     boolean favo;
-    private static FragmentFavs ff;
-    public static FragmentContacts fc;
     Dialog myDialog;
 
     public ContactsRvAdapter(Context context, List<ModelContacts> listContacts) {
@@ -67,8 +65,6 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
-        ff = FragmentFavs.getInstance();
-        fc = FragmentContacts.getInstance();
 
         TextView contact_name, contact_number;
         ImageView boton, contact_icon;
@@ -90,9 +86,9 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListContacts.get(position).setFav(true);
+
                 if (!favo) {
-                    if (!holder.fav) {
+                    if (!mListContacts.get(position).isFav()) {
                         mListContacts.get(position).setFav(true);
                         holder.boton.setImageResource(R.drawable.full_star);
                         holder.fav=true;

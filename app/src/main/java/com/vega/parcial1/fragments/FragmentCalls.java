@@ -65,7 +65,7 @@ public class FragmentCalls extends Fragment {
         List<ModelCalls> list = new ArrayList<>();
 
         if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.READ_CALL_LOG) != PackageManager.PERMISSION_GRANTED) {
-           // requestPermission();
+
             }
 
 

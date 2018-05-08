@@ -42,10 +42,12 @@ public class MainActivity extends AppCompatActivity {
     private static TabLayout tabLayout;
     public static ViewPager viewPager;
     private int code = 14;
+    public static  int c =1;
 
     private static final int[] ICONS = {(R.drawable.llamada), (R.drawable.contacto), (R.drawable.star)};
 
     ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
+    public final FragmentContacts fc = new FragmentContacts();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +83,30 @@ public class MainActivity extends AppCompatActivity {
         MenuItem item = menu.findItem(R.id.searchbar);
         SearchView searchView = (SearchView) item.getActionView();
 
+        searchView.setOnCloseListener(new SearchView.OnCloseListener() {
+            @Override
+            public boolean onClose() {
+
+                FragmentContacts.auxlist();
+                updatepager(1);
+                return false;
+            }
+        });
+
+        searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener()
+        {
+            @Override
+            public void onFocusChange(View v, boolean newViewFocus)
+            {
+                if (!newViewFocus)
+                {
+                    FragmentContacts.auxlist();
+                    updatepager(1);
+
+                }
+            }
+        });
+
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
 
 
@@ -91,9 +117,10 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                adapter.filter(newText);
-                Log.d("Main Activity:", "Entrando a buscar");
+                fc.filter(newText);
                 viewPager.setCurrentItem(1);
+                FragmentContacts.updatefc();
+                updatepager(1);
 
                 return false;
             }
@@ -101,7 +128,7 @@ public class MainActivity extends AppCompatActivity {
 
         });
 
-        return super.onCreateOptionsMenu(menu);
+        return true;
     }
 
     @Override

@@ -2,6 +2,7 @@ package com.vega.parcial1.fragments;
 
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -31,9 +32,10 @@ import static com.vega.parcial1.fragments.FragmentContacts.list;
 public class FragmentFavs extends Fragment {
     boolean fav;
     private View v;
-    private RecyclerView recyclerView;
+    public static RecyclerView recyclerView;
     private static  FragmentFavs ff;
-    List<ModelContacts> favs;
+    public static List<ModelContacts> favs = new ArrayList<>();
+    public Context mcontext;
 
 
     public FragmentFavs(){
@@ -49,7 +51,7 @@ public class FragmentFavs extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         RecyclerView.LayoutManager layoutManager = linearLayoutManager;
         recyclerView.setLayoutManager(layoutManager);
-        FavsRvAdapter adapter = new FavsRvAdapter(getContext(), getFavs(), true);
+        FavsRvAdapter adapter = new FavsRvAdapter(getContext(), getFavs());
         recyclerView.setAdapter(adapter);
 
         return v;
@@ -62,7 +64,7 @@ public class FragmentFavs extends Fragment {
         List<ModelContacts> favs = new ArrayList<>();
         for (int i = 0; i<list.size();i++){
             if (list.get(i).isFav() == true){
-                favs.add(new ModelContacts(list.get(i).getName(), list.get(i).getNumber(), list.get(i).isFav()));
+                favs.add(new ModelContacts(list.get(i).getName(), list.get(i).getNumber(), true));
             }
         }
 
@@ -81,12 +83,7 @@ public class FragmentFavs extends Fragment {
                 favs.add(new ModelContacts(list.get(i).getName(), list.get(i).getNumber(), list.get(i).isFav()));
             }
         }
-        FavsRvAdapter adapter = new FavsRvAdapter(getContext(), getFavs(), true);
-        recyclerView.setAdapter(adapter);
-    }
-
-    public void updatefav(){
-        FavsRvAdapter adapter = new FavsRvAdapter(getContext(), getFavs(), true);
+        FavsRvAdapter adapter = new FavsRvAdapter(getContext(), getFavs());
         recyclerView.setAdapter(adapter);
     }
 

@@ -29,12 +29,11 @@ public class FavsRvAdapter extends RecyclerView.Adapter<FavsRvAdapter.ViewHolder
     private LayoutInflater inflater;
     private Context mcontext;
     private boolean favo;
-    private List<ModelContacts> mListFavs;
+    public List<ModelContacts> mListFavs;
 
-    public FavsRvAdapter(Context mcontext, List<ModelContacts> mListFavs, Boolean favo) {
+    public FavsRvAdapter(Context mcontext, List<ModelContacts> mListFavs) {
         this.mcontext = mcontext;
         this.mListFavs = mListFavs;
-        this.favo = favo;
     }
 
     @NonNull
@@ -43,7 +42,7 @@ public class FavsRvAdapter extends RecyclerView.Adapter<FavsRvAdapter.ViewHolder
 
         inflater = LayoutInflater.from(mcontext);
         View view = inflater.inflate(R.layout.item_favs, parent, false);
-        ViewHolder viewHolder = new ViewHolder(view, this.favo);
+        ViewHolder viewHolder = new ViewHolder(view);
 
         return viewHolder;
     }
@@ -56,9 +55,9 @@ public class FavsRvAdapter extends RecyclerView.Adapter<FavsRvAdapter.ViewHolder
         contact_name = holder.contact_name;
         contact_number = holder.contact_number;
         boton = holder.boton;
+
         contact_name.setText(mListFavs.get(position).getName());
         contact_number.setText(mListFavs.get(position).getNumber());
-
         boton.setImageResource(mListFavs.get(position).isFav()?R.drawable.full_star:R.drawable.star);
 
         boton.setOnClickListener(new View.OnClickListener() {
@@ -81,7 +80,6 @@ public class FavsRvAdapter extends RecyclerView.Adapter<FavsRvAdapter.ViewHolder
 
                         holder.boton.setImageResource(R.drawable.star);
                         holder.fav=false;
-                        Log.d("MIC", "quita la estrella");
 
 
                     } else {
@@ -118,7 +116,6 @@ public class FavsRvAdapter extends RecyclerView.Adapter<FavsRvAdapter.ViewHolder
 
                 }
                 updatepager(2);
-//
 
             }
         });
@@ -139,14 +136,12 @@ public class FavsRvAdapter extends RecyclerView.Adapter<FavsRvAdapter.ViewHolder
         ImageView boton;
         boolean fav;
 
-        public ViewHolder(View itemView, boolean favs){
+        public ViewHolder(View itemView){
             super(itemView);
 
             contact_name = itemView.findViewById(R.id.contact_name);
             contact_number = itemView.findViewById(R.id.contact_number);
             boton = itemView.findViewById(R.id.favorito);
-
-            fav = favs;
         }
     }
 }

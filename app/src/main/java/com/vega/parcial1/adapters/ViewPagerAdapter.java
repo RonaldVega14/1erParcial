@@ -27,18 +27,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     }
 
 
-        public List<ModelContacts> filter( String query){
-        query = query.toLowerCase();
-        final List<ModelContacts> filteredContactList = new ArrayList<>();
-        for (ModelContacts model:list){
-            final String text = model.getName().toLowerCase();
-            if (text.startsWith(query)){
-                filteredContactList.add(model);
-                Log.d(" ViewPagerAdapter", "Agregando un modelo a la lista: " + text);
-            }
-        }
-        return filteredContactList;
-    }
     @Override
     public Fragment getItem(int position) {
         return listFragment.get(position);
@@ -60,12 +48,6 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
         listTitles.add(title);
     }
 
-    public static void updateFrag(int i){
-        Fragment frag= listFragment.get(i);
-        listFragment.get(i).onDestroy();
-        listFragment.set(i, frag);
-
-    }
 
 
 }
