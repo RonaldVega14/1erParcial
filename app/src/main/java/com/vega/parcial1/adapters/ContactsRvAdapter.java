@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.vega.parcial1.MainActivity;
 import com.vega.parcial1.R;
+import com.vega.parcial1.fragments.FragmentContacts;
 import com.vega.parcial1.fragments.FragmentFavs;
 import com.vega.parcial1.models.ModelContacts;
 
@@ -28,14 +29,16 @@ import java.util.List;
 
 import static android.support.v4.app.ActivityCompat.requestPermissions;
 import static android.support.v4.content.ContextCompat.startActivity;
+import static com.vega.parcial1.MainActivity.viewPager;
 
 public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.ViewHolder> {
 
     private LayoutInflater inflater;
     private Context mcontext;
-    private List<ModelContacts> mListContacts;
+    private static List<ModelContacts> mListContacts;
     boolean favo;
-    private FragmentFavs ff;
+    private static FragmentFavs ff;
+    public static FragmentContacts fc;
 
     public ContactsRvAdapter(Context context, List<ModelContacts> listContacts) {
         mcontext = context;
@@ -56,6 +59,7 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
 
         ff = FragmentFavs.getInstance();
+        fc = FragmentContacts.getInstance();
 
         TextView contact_name, contact_number;
         ImageView boton, contact_icon;
@@ -101,8 +105,8 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
                     }
                 }
 
-//                ff.update(mListContacts);
-
+                viewPager.setCurrentItem(0);
+                viewPager.setCurrentItem(1);
 
             }
 

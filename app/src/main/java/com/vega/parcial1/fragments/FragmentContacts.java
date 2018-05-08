@@ -34,12 +34,18 @@ public class FragmentContacts extends Fragment {
     private static  FragmentContacts fc;
     public static List<ModelContacts> list = new ArrayList<>();
     ContactsRvAdapter adapter;
-    SearchView searchView;
 
     ModelContacts modelo;
 
+
     public FragmentContacts(){
 
+    }
+
+    public static FragmentContacts newInstance() {
+
+        FragmentContacts fragment = new FragmentContacts();
+        return fragment;
     }
 
 
@@ -51,7 +57,8 @@ public class FragmentContacts extends Fragment {
         recyclerView = v.findViewById(R.id.rv_contacts);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         RecyclerView.LayoutManager layoutManager = linearLayoutManager;
-        recyclerView.setLayoutManager(layoutManager);adapter = new ContactsRvAdapter(getContext(), getContacts());
+        recyclerView.setLayoutManager(layoutManager);
+        adapter = new ContactsRvAdapter(getContext(), getContacts());
         recyclerView.setAdapter(adapter);
 
         return v;
@@ -89,7 +96,7 @@ public class FragmentContacts extends Fragment {
         return list;
     }
 
-    public FragmentContacts getInstance(){
+    public static FragmentContacts getInstance(){
         return fc;
     }
 

@@ -69,17 +69,6 @@ public class FragmentFavs extends Fragment {
         return favs;
     }
 
-//    public List<ModelContacts> prepareFavContacts(List<ModelContacts> contacto){
-//        for (int i = 0; i<contacto.size();i++){
-//            if(contacto.get(i).isFav()) {
-//                favs.add(new ModelContacts(contacto.get(i).getName(), contacto.get(i).getNumber(), contacto.get(i).isFav()));
-//            }
-//        }
-//
-//        return favs;
-//    }
-//
-
     public static FragmentFavs getInstance(){
         return ff;
     }
@@ -92,6 +81,11 @@ public class FragmentFavs extends Fragment {
                 favs.add(new ModelContacts(list.get(i).getName(), list.get(i).getNumber(), list.get(i).isFav()));
             }
         }
+        FavsRvAdapter adapter = new FavsRvAdapter(getContext(), getFavs(), true);
+        recyclerView.setAdapter(adapter);
+    }
+
+    public void updatefav(){
         FavsRvAdapter adapter = new FavsRvAdapter(getContext(), getFavs(), true);
         recyclerView.setAdapter(adapter);
     }

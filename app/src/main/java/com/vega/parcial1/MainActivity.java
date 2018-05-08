@@ -39,14 +39,11 @@ import static com.vega.parcial1.fragments.FragmentContacts.list;
 public class MainActivity extends AppCompatActivity {
 
 
-    private TabLayout tabLayout;
-    private ViewPager viewPager;
+    private static TabLayout tabLayout;
+    public static ViewPager viewPager;
     private int code = 14;
-//    MainActivityAdapter madapter;
-//    RecyclerView searchrv;
-//    SearchView searchView;
 
-    private final int[] ICONS = {(R.drawable.llamada), (R.drawable.contacto), (R.drawable.star)};
+    private static final int[] ICONS = {(R.drawable.llamada), (R.drawable.contacto), (R.drawable.star)};
 
     ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
@@ -75,20 +72,6 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        switch (item.getItemId()) {
-//            case R.id.action_search:
-//                Toast.makeText(this, "Hola, ready pa buscar", Toast.LENGTH_LONG);
-//
-//            default:
-//                // If we got here, the user's action was not recognized.
-//                // Invoke the superclass to handle it.
-//                return super.onOptionsItemSelected(item);
-//
-//        }
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -146,6 +129,18 @@ public class MainActivity extends AppCompatActivity {
         ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.READ_CALL_LOG,Manifest.permission.READ_CONTACTS, Manifest.permission.CALL_PHONE},code);
 
     }
+
+    public static void updatepager(int d){
+
+        viewPager.setAdapter(viewPager.getAdapter());
+        for (int i = 0; i < tabLayout.getTabCount(); i++) {
+            TabLayout.Tab tab = tabLayout.getTabAt(i);
+            tab.setIcon(ICONS[i]);
+        }
+        viewPager.setCurrentItem(d);
+    }
+
+
 
 }
 
