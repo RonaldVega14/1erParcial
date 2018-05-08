@@ -128,8 +128,8 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
         contacto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TextView tvname = myDialog.findViewById(R.id.display_name);
-                TextView tvnumber = myDialog.findViewById(R.id.display_number);
+                final TextView tvname = myDialog.findViewById(R.id.display_name);
+                final TextView tvnumber = myDialog.findViewById(R.id.display_number);
                 tvname.setText(mListContacts.get(position).getName());
                 tvnumber.setText(mListContacts.get(position).getNumber());
                 myDialog.show();
@@ -139,6 +139,13 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
                     @Override
                     public void onClick(View v) {
                         Toast.makeText(mcontext, "Compartiendo datos", Toast.LENGTH_SHORT).show();
+
+                        Intent shareIntent = new Intent();
+                        shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
+                        shareIntent.setType("*/*");
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, mcontext.getString(R.string.app_nombre) + ": " + mListContacts.get(position).getName().toString() + "\n" + mcontext.getString(R.string.app_numero) + ": " + mListContacts.get(position).getNumber().toString() );
+                        mcontext.startActivity(shareIntent);
+
                     }
                 });
             }
