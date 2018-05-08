@@ -82,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
         SearchView searchView = (SearchView) item.getActionView();
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+
+
             @Override
             public boolean onQueryTextSubmit(String query) {
                 return false;
@@ -95,6 +97,8 @@ public class MainActivity extends AppCompatActivity {
 
                 return false;
             }
+
+
         });
 
         return super.onCreateOptionsMenu(menu);
@@ -139,8 +143,6 @@ public class MainActivity extends AppCompatActivity {
         }
         viewPager.setCurrentItem(d);
     }
-
-
 
 }
 

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="350dp"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center">
+
+    <LinearLayout
+        android:layout_marginTop="65dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:background="@color/colorPrimary"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:id="@+id/display_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_nombre"
+            android:textColor="@color/white"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginTop="60dp"/>
+
+        <TextView
+            android:id="@+id/display_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_numero"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginTop="5sp"/>
+
+        <TextView
+            android:id="@+id/display_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/app_fecha"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:layout_marginTop="5sp"
+            android:layout_marginBottom="10sp"/>
+
+        <Button
+            android:id="@+id/display_call"
+            android:padding="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:text="@string/llamada"/>
+        <Button
+            android:id="@+id/display_share"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="10dp"
+            android:text="@string/share"/>
+
+    </LinearLayout>
+
+    <ImageView
+
+        android:id="@+id/display_image"
+        android:padding="10dp"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/contact_disp"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        />
+
+
+
+
+</RelativeLayout>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Parcial1</string>
+
+    <string name="app_nombre">Nombre</string>
+    <string name="app_numero">Numero</string>
+    <string name="tab_lamada">Llamadas</string>
+    <string name="tab_fav">Favoritos</string>
+    <string name="tab_contacto">Contactos</string>
+    <string name="app_duracion">Duracion</string>
+    <string name="app_fecha">Fecha</string>
+    <string name="llamada">Llamar</string>
+    <string name="share">Compartir</string>
+    <string name="app_permisos">P</string>
+</resources>

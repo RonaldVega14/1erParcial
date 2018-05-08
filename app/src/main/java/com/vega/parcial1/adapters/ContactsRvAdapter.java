@@ -1,6 +1,7 @@
 package com.vega.parcial1.adapters;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -10,11 +11,13 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +26,8 @@ import com.vega.parcial1.R;
 import com.vega.parcial1.fragments.FragmentContacts;
 import com.vega.parcial1.fragments.FragmentFavs;
 import com.vega.parcial1.models.ModelContacts;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +44,7 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
     boolean favo;
     private static FragmentFavs ff;
     public static FragmentContacts fc;
+    Dialog myDialog;
 
     public ContactsRvAdapter(Context context, List<ModelContacts> listContacts) {
         mcontext = context;
@@ -52,6 +58,9 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
         View view = inflater.inflate(R.layout.item_contacts, parent, false);
         ViewHolder viewHolder = new ViewHolder(view, this.favo);
 
+        myDialog = new Dialog(mcontext);
+        myDialog.setContentView(R.layout.contact_display);
+
         return viewHolder;
     }
 
@@ -63,11 +72,13 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
 
         TextView contact_name, contact_number;
         ImageView boton, contact_icon;
+        LinearLayout contacto;
 
         contact_name = holder.contact_name;
         contact_number = holder.contact_number;
         boton = holder.boton;
         contact_icon = holder.contact_icon;
+        contacto = holder.contacto;
 
 
 
@@ -113,6 +124,32 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
 
         });
 
+
+        contacto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                TextView tvname = myDialog.findViewById(R.id.display_name);
+                TextView tvnumber = myDialog.findViewById(R.id.display_number);
+                tvname.setText(mListContacts.get(position).getName());
+                tvnumber.setText(mListContacts.get(position).getNumber());
+                myDialog.show();
+
+                Button share = myDialog.findViewById(R.id.display_share);
+                share.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Toast.makeText(mcontext, "Compartiendo datos", Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+
+
+
+        });
+
+
+
     }
 
     @Override
@@ -125,16 +162,19 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
 
         TextView contact_name, contact_number;
         ImageView boton, contact_icon;
+        LinearLayout contacto;
+        Button share;
         boolean fav;
 
         public ViewHolder(View itemView, boolean favo){
             super(itemView);
 
-
+            contacto = itemView.findViewById(R.id.desplegar);
             contact_name = itemView.findViewById(R.id.contact_name);
             contact_number = itemView.findViewById(R.id.contact_number);
             boton = itemView.findViewById(R.id.favorito);
             contact_icon = itemView.findViewById(R.id.contact_icon);
+            share = itemView.findViewById(R.id.display_share);
             fav = favo;
 
         }
