@@ -16,6 +16,7 @@
         android:layout_height="32dp" />
 
     <LinearLayout
+        android:id="@+id/desplegar"
         android:padding="10dp"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
