@@ -11,5 +11,6 @@
     <string name="app_fecha">Fecha</string>
     <string name="llamada">Llamar</string>
     <string name="share">Compartir</string>
+    <string name="busqueda">Escribir para buscar en contactos</string>
     <string name="app_permisos">P</string>
 </resources>

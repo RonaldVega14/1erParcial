@@ -10,5 +10,6 @@
     <string name="app_fecha">Date</string>
     <string name="llamada">Make Call</string>
     <string name="share">Share</string>
+    <string name="busqueda">Type to search in contacts</string>
     <string name="app_permisos">P</string>
 </resources>

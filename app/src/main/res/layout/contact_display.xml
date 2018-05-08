@@ -2,7 +2,7 @@
 <RelativeLayout
 
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="350dp"
+    android:layout_width="330dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:gravity="center"
@@ -46,12 +46,14 @@
             android:layout_marginBottom="10sp"/>
 
         <Button
+            android:drawableLeft="@android:drawable/ic_menu_call"
             android:id="@+id/display_call"
             android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@color/colorPrimaryDark"
             android:textColor="@color/white"
+            android:drawablePadding="-28dp"
             android:text="@string/llamada"/>
         <Button
             android:id="@+id/display_share"
@@ -60,7 +62,9 @@
             android:background="@color/colorPrimaryDark"
             android:textColor="@color/white"
             android:padding="10dp"
-            android:text="@string/share"/>
+            android:text="@string/share"
+            android:drawablePadding="-30dp"
+            android:drawableLeft="@android:drawable/ic_menu_share"/>
 
     </LinearLayout>
 
@@ -74,7 +78,6 @@
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
         />
-
 
 
 

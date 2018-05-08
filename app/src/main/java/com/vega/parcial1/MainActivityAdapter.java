@@ -42,14 +42,6 @@ public class MainActivityAdapter  extends RecyclerView.Adapter<MainActivityAdapt
         holder.contact_number.setText(modelContactsList.get(position).getNumber());
         holder.contact_icon.setImageResource(R.drawable.contacto);
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Toast.makeText(mcontext, "Click on" + modelContactsList.get(position).getName(), Toast.LENGTH_SHORT);
-
-            }
-        });
 
     }
 
