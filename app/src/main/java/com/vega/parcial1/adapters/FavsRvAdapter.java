@@ -1,7 +1,12 @@
 package com.vega.parcial1.adapters;
 
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -51,10 +56,12 @@ public class FavsRvAdapter extends RecyclerView.Adapter<FavsRvAdapter.ViewHolder
     public void onBindViewHolder(@NonNull final ViewHolder holder, final int position) {
         TextView contact_name, contact_number;
         ImageView boton;
+        Button llamar;
 
         contact_name = holder.contact_name;
         contact_number = holder.contact_number;
         boton = holder.boton;
+        llamar = holder.llamar;
 
         contact_name.setText(mListFavs.get(position).getName());
         contact_number.setText(mListFavs.get(position).getNumber());
@@ -120,6 +127,14 @@ public class FavsRvAdapter extends RecyclerView.Adapter<FavsRvAdapter.ViewHolder
             }
         });
 
+        llamar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                llamar(mListFavs.get(position).getNumber());
+            }
+        });
+
 
     }
 
@@ -134,6 +149,7 @@ public class FavsRvAdapter extends RecyclerView.Adapter<FavsRvAdapter.ViewHolder
 
         TextView contact_name, contact_number;
         ImageView boton;
+        Button llamar;
         boolean fav;
 
         public ViewHolder(View itemView){
@@ -142,6 +158,18 @@ public class FavsRvAdapter extends RecyclerView.Adapter<FavsRvAdapter.ViewHolder
             contact_name = itemView.findViewById(R.id.contact_name);
             contact_number = itemView.findViewById(R.id.contact_number);
             boton = itemView.findViewById(R.id.favorito);
+            llamar = itemView.findViewById(R.id.llamar);
         }
+    }
+
+    private void llamar(final String phoneNumber) {
+        if (ActivityCompat.checkSelfPermission(mcontext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//              requestPermissions(mcontext,Manifest.permission.CALL_PHONE,1);
+        }else{
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel:"+phoneNumber));
+            mcontext.startActivity(intent);
+        }
+
     }
 }

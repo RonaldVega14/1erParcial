@@ -69,19 +69,20 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
         TextView contact_name, contact_number;
         ImageView boton, contact_icon;
         LinearLayout contacto;
+        Button llamar;
 
         contact_name = holder.contact_name;
         contact_number = holder.contact_number;
         boton = holder.boton;
         contact_icon = holder.contact_icon;
         contacto = holder.contacto;
-
+        llamar = holder.llamar;
 
 
         contact_name.setText(mListContacts.get(position).getName());
         contact_number.setText(mListContacts.get(position).getNumber());
         contact_icon.setImageResource(R.drawable.contacto);
-        boton.setImageResource(mListContacts.get(position).isFav()?R.drawable.full_star:R.drawable.star);
+        boton.setImageResource(mListContacts.get(position).isFav() ? R.drawable.full_star : R.drawable.star);
 
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,12 +92,12 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
                     if (!mListContacts.get(position).isFav()) {
                         mListContacts.get(position).setFav(true);
                         holder.boton.setImageResource(R.drawable.full_star);
-                        holder.fav=true;
+                        holder.fav = true;
 
                     } else {
                         mListContacts.get(position).setFav(false);
                         holder.boton.setImageResource(R.drawable.star);
-                        holder.fav=false;
+                        holder.fav = false;
                     }
 
                 } else {
@@ -120,6 +121,14 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
 
         });
 
+        llamar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                llamar(mListContacts.get(position).getNumber());
+            }
+        });
+
 
         contacto.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -139,7 +148,7 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
                         Intent shareIntent = new Intent();
                         shareIntent.setAction(Intent.ACTION_SEND_MULTIPLE);
                         shareIntent.setType("*/*");
-                        shareIntent.putExtra(Intent.EXTRA_TEXT, mcontext.getString(R.string.app_nombre) + ": " + mListContacts.get(position).getName().toString() + "\n" + mcontext.getString(R.string.app_numero) + ": " + mListContacts.get(position).getNumber().toString() );
+                        shareIntent.putExtra(Intent.EXTRA_TEXT, mcontext.getString(R.string.app_nombre) + ": " + mListContacts.get(position).getName().toString() + "\n" + mcontext.getString(R.string.app_numero) + ": " + mListContacts.get(position).getNumber().toString());
                         mcontext.startActivity(shareIntent);
 
                     }
@@ -147,10 +156,7 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
             }
 
 
-
-
         });
-
 
 
     }
@@ -166,10 +172,11 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
         TextView contact_name, contact_number;
         ImageView boton, contact_icon;
         LinearLayout contacto;
-        Button share;
+        Button share, llamar;
         boolean fav;
 
-        public ViewHolder(View itemView, boolean favo){
+
+        public ViewHolder(View itemView, boolean favo) {
             super(itemView);
 
             contacto = itemView.findViewById(R.id.desplegar);
@@ -178,8 +185,20 @@ public class ContactsRvAdapter extends RecyclerView.Adapter<ContactsRvAdapter.Vi
             boton = itemView.findViewById(R.id.favorito);
             contact_icon = itemView.findViewById(R.id.contact_icon);
             share = itemView.findViewById(R.id.display_share);
+            llamar = itemView.findViewById(R.id.llamar);
             fav = favo;
 
         }
+    }
+
+    private void llamar(final String phoneNumber) {
+        if (ActivityCompat.checkSelfPermission(mcontext, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+//              requestPermissions(mcontext,Manifest.permission.CALL_PHONE,1);
+        }else{
+            Intent intent = new Intent(Intent.ACTION_CALL);
+            intent.setData(Uri.parse("tel:"+phoneNumber));
+            mcontext.startActivity(intent);
+        }
+
     }
 }
