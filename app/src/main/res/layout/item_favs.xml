@@ -8,6 +8,8 @@
     android:orientation="horizontal">
 
     <Button
+        android:maxHeight="44dp"
+        android:maxWidth="44dp"
         android:layout_weight="1"
         android:layout_marginLeft="8dp"
         android:layout_gravity="center"
@@ -41,6 +43,8 @@
     </LinearLayout>
 
     <ImageView
+        android:maxHeight="44dp"
+        android:maxWidth="44dp"
         android:id="@+id/favorito"
         android:layout_width="0dp"
         android:layout_height="32dp"
@@ -52,6 +56,8 @@
 
 
     <Button
+        android:maxHeight="44dp"
+        android:maxWidth="44dp"
         android:id="@+id/llamar"
         android:layout_weight="1"
         android:layout_marginRight="8dp"

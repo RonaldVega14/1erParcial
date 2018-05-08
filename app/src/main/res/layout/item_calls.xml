@@ -6,7 +6,8 @@
     android:orientation="horizontal">
 
     <Button
-
+        android:maxHeight="44dp"
+        android:maxWidth="44dp"
         android:layout_width="0dp"
         android:layout_height="42dp"
         android:layout_gravity="center"
